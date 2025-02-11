@@ -1,6 +1,6 @@
 from fastapi import FastAPI,Depends
 from app.routes.users import users
-from app.routes.auth import auth, oauth2_schema
+from app.routes.auth import auth, oauth2_scheme
 #from app.core.security import verify_token
 
 app = FastAPI()

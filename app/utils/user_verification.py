@@ -1,5 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.security import verify_password
 from app.models.users import Users
 from app.schemas.users import UserInDB, UserCreate
 from app.utils.email_validator import validate_email
@@ -15,3 +17,13 @@ async def verify_user(user_id: int, db: AsyncSession):
     result = await db.execute(select(Users).where(Users.id == user_id))
     existing_user = result.scalar_one_or_none()
     return existing_user
+
+async def authenticate_user(username: str, password:str , db: AsyncSession):
+    result = await db.execute(select(Users).where(Users.username == username))
+    user = result.scalar_one_or_none()
+    if not user:
+        return False
+    if not verify_password(password, user.hashed_password):
+        return False
+    return user
+

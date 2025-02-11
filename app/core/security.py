@@ -14,6 +14,9 @@ context_schema = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def get_hashed_password(password: str):
     return context_schema.hash(password)
 
+def verify_password(plain_password: str, hashed_password: str):
+    return context_schema.verify(plain_password, hashed_password)
+
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy() # copia los datos ingresados por parametro
     if expires_delta:

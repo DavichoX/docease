@@ -37,3 +37,16 @@ class UserInDB(UserBase):
                 "hashed_password": "<PASSWORD>",
             }
         }
+
+
+class UserUpdate(UserBase):
+    username: str
+    email: str
+    class Config:
+        from_attributes = True
+        json_schema_extra = {
+            "example": {
+                "username": "<NAME>",
+                "email": "<EMAIL>",
+            }
+        }
