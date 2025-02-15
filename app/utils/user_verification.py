@@ -19,7 +19,7 @@ async def verify_user(user_id: int, db: AsyncSession):
     return existing_user
 
 async def authenticate_user(username: str, password:str , db: AsyncSession):
-    result = await db.execute(select(Users).where(Users.username == username))
+    result = await db.execute(select(Users).where(Users.email == username))
     user = result.scalar_one_or_none()
     if not user:
         return False

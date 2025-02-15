@@ -12,6 +12,6 @@ auth = APIRouter()
 
 @auth.post("/login")
 async def login(form_data : Annotated[OAuth2PasswordRequestForm, Depends()], db : AsyncSession = Depends(get_db)) -> Token:
-    access_token = login_logic(form_data, db)
+    access_token = await login_logic(form_data, db)
     return Token(access_token=access_token, token_type="Bearer")
 

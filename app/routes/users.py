@@ -3,6 +3,7 @@ from app.services.users_service import register_user, delete_user
 from app.schemas.users import UserCreate
 from app.core.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
+
 users = APIRouter()
 
 @users.post("/register/")
