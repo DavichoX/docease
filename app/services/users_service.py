@@ -5,8 +5,10 @@ from app.schemas.users import UserCreate
 from app.models.users import Users
 from app.core.security import get_hashed_password
 from app.utils.user_verification import verify_existing_user, verify_user
+from app.utils.email_validator import validate_email
 
 async def register_user(user: UserCreate, db: AsyncSession):
+    await validate_email(user.email)
     existing_user = await verify_existing_user(user,db)
     if existing_user:
         raise HTTPException(

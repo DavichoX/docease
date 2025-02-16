@@ -4,11 +4,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.security import verify_password
 from app.models.users import Users
 from app.schemas.users import UserInDB, UserCreate
-from app.utils.email_validator import validate_email
+
 
 
 async def verify_existing_user(user: UserCreate | UserInDB, db: AsyncSession):
-    validate_email(user.email)
     result = await db.execute(select(Users).where(Users.email == user.email))
     existing_user = result.scalars().first()
     return existing_user
