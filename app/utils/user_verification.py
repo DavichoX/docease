@@ -6,7 +6,6 @@ from app.models.users import Users
 from app.schemas.users import UserInDB, UserCreate
 
 
-
 async def verify_existing_user(user: UserCreate | UserInDB, db: AsyncSession):
     result = await db.execute(select(Users).where(Users.email == user.email))
     existing_user = result.scalars().first()

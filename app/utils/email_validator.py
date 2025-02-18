@@ -1,10 +1,9 @@
 from fastapi import HTTPException
 from starlette import status
 
-async def validate_email(email):
+def validate_email(email):
     if not "@" in email:
-        return HTTPException(
+        raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Email must contain '@'",
+            detail= "Email must contain '@'",
         )
-    return True
