@@ -5,6 +5,7 @@ from app.core.database import Base
 #from dotenv import load_dotenv
 from app.core.config import settings
 from app.models.users import Users
+from app.models.workspace import Workspace
 
 from alembic import context
 
