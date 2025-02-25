@@ -4,5 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 workspaces = APIRouter()
 
-async def workspace():
+async def save_workspace_settings():
+    pass
+
+async def get_workspace_settings():
     pass
