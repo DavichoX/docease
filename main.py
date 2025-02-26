@@ -3,8 +3,6 @@ from app.routes.users import users
 from app.routes.auth import auth, oauth2_scheme
 #from app.core.security import verify_token
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes.workspaces import workspaces
-
 app = FastAPI()
 
 allowed_origins:list[str] = [
