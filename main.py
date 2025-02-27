@@ -1,4 +1,6 @@
 from fastapi import FastAPI,Depends
+
+from app.routes.documents import documents
 from app.routes.users import users
 from app.routes.auth import auth, oauth2_scheme
 #from app.core.security import verify_token
@@ -23,4 +25,4 @@ async def read_root():
 
 app.include_router(users, prefix="/users")
 app.include_router(auth, prefix="/auth")
-app.include_router(workspaces, prefix="/")
+app.include_router(documents, prefix="/documents")

@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, String, TIMESTAMP, func
+from sqlalchemy import Integer, String, TIMESTAMP, func, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.core.database import Base
 from app.models.users import Users
@@ -17,4 +17,5 @@ class Documents(Base):
                                                  default = datetime.now(),
                                                  onupdate=func.now,
                                                  autoincrement=False)
-    user_id: Mapped[int] = mapped_column(Integer, foreign_key='Users.id')
+    created_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
+    updated_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))

@@ -8,3 +8,4 @@ class Collaboration(Base):
     __tablename__ = 'collaboration'
 
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("Users.id") , primary_key=True)
+    email: Mapped[str] = mapped_column(String)
