@@ -18,6 +18,6 @@ class Block(Base):
                                                   onupdate=func.now(),
                                                   autoincrement=False)
     order: Mapped[int] = mapped_column(Integer)
-    doc_id: Mapped[int] = mapped_column(Integer, ForeignKey('Documents.id'))
+    doc_id: Mapped[int] = mapped_column(Integer, ForeignKey('documents.id'))
     created_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
     updated_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))

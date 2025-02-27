@@ -5,6 +5,8 @@ from app.core.database import Base
 #from dotenv import load_dotenv
 from app.core.config import settings
 from app.models.users import Users
+from app.models.blocks import Block
+from app.models.documents import Documents
 
 
 from alembic import context

@@ -1,8 +1,9 @@
+from fastapi import HTTPException, status
+from alembic.util import status
 from sqlalchemy import select
 from app.models.documents import Documents
 from app.models.blocks import Block
 from app.schemas.documents import Document, DocumentCreate
-from app.schemas.blocks import Block
 from sqlalchemy.ext.asyncio import AsyncSession
 
 async def create_document(document: DocumentCreate, db: AsyncSession):
@@ -30,6 +31,12 @@ async def create_document(document: DocumentCreate, db: AsyncSession):
 async def get_document(document_id: int,db: AsyncSession):
     result = await db.execute(select(Documents).where(Documents.id == document_id))
     document = result.scalar_one_or_none()
+    if not document:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Document not found",
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
     return document
 
 async def delete_document():
