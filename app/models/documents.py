@@ -18,4 +18,4 @@ class Documents(Base):
                                                  onupdate=func.now,
                                                  autoincrement=False)
     created_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
-    updated_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
+    updated_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=True)

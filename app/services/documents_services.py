@@ -7,7 +7,7 @@ from app.schemas.documents import Document, DocumentCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 
 async def create_document(document: DocumentCreate, db: AsyncSession):
-    db_document = Document(
+    db_document = Documents(
         title=document.title,
         created_by_id=document.created_by_id,
         updated_by_id=document.updated_by_id,

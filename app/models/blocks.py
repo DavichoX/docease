@@ -19,5 +19,5 @@ class Block(Base):
                                                   autoincrement=False)
     order: Mapped[int] = mapped_column(Integer)
     doc_id: Mapped[int] = mapped_column(Integer, ForeignKey('documents.id'))
-    created_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
-    updated_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'))
+    created_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
+    updated_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=True)

@@ -16,5 +16,6 @@ async def login_logic(form_data : Annotated[OAuth2PasswordRequestForm, Depends()
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"sub":user.username}, expires_delta=access_token_expires)
+    access_token = create_access_token(data={"sub":user.email}, expires_delta=access_token_expires)
+    print(f"Token generado: {access_token}")
     return access_token

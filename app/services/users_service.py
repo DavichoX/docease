@@ -6,7 +6,7 @@ from app.core.database import get_db
 from app.schemas.users import UserCreate
 from app.models.users import Users
 from app.core.security import get_hashed_password, SECRET_KEY, ALGORITHM
-from app.utils.user_verification import verify_existing_user, verify_user
+from app.utils.user_verification import verify_existing_user, verify_user, verify_db_user
 from app.utils.email_validator import validate_email
 from jose import jwt, JWTError
 from app.routes.auth import oauth2_scheme
@@ -32,7 +32,7 @@ async def register_user(user: UserCreate, db: AsyncSession):
 
 
 async def delete_user(user: int, db: AsyncSession):
-    existing_user = verify_user(user, db)
+    existing_user = await verify_user(user, db)
     if not existing_user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -52,14 +52,17 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms = [ALGORITHM])
-        username: str = payload.get("sub")
-        if username is None:
+        email: str = payload.get("sub")
+        if email is None:
             raise credentials_exceptions
     except JWTError:
         raise credentials_exceptions
-    user = verify_existing_user(username, db)
+    user = await verify_db_user(email, db)
     if user is None:
         raise credentials_exceptions
+    print(f"Token recibido: {token}")
+    print(f"Payload decodificado: {payload}")
+    print(f"Email extraído: {email}")
     return user
 
 

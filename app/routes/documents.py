@@ -12,8 +12,9 @@ documents = APIRouter()
 async def create_document_endpoint(document: DocumentCreate,
                                    db: AsyncSession = Depends(get_db),
                                    current: UserInDB = Depends(get_current_user)):
-    document.created_by = current.id
-    document.updated_by = current.id
+    document.created_by_id = current.id
+    document.updated_by_id = current.id
+
     return await create_document(db=db, document=document)
 
 @documents.get("/{document_id}", response_model=Document)

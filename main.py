@@ -24,5 +24,5 @@ async def read_root():
     return {"hello": "world"}
 
 app.include_router(users, prefix="/users")
-app.include_router(auth, prefix="/auth")
+app.include_router(auth)
 app.include_router(documents, prefix="/documents")
