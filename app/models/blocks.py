@@ -7,7 +7,7 @@ from datetime import datetime
 class Block(Base):
     __tablename__ = 'blocks'
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True) # transitioning to UUID later
     content: Mapped[String] = mapped_column(String)
     created_at: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP(timezone=True),
                                                   server_default = func.now(),

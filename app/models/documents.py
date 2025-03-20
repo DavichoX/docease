@@ -19,3 +19,5 @@ class Documents(Base):
                                                  autoincrement=False)
     created_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=False)
     updated_by_id: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=True)
+    assigned_to: Mapped[int] = mapped_column(Integer, ForeignKey('users.id'), nullable=True, default=None)
+    status: Mapped[str] = mapped_column(String, nullable=False, server_default='no edited')

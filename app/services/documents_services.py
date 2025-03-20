@@ -39,5 +39,17 @@ async def get_document(document_id: int,db: AsyncSession):
         )
     return document
 
+async def get_recent_documents(db: AsyncSession):
+    result = await db.execute(select(Documents).order_by(Documents.created_at.asc()).limit(5))
+    documents = result.scalars().all()
+    print(documents)
+    return documents
+
+async def get_all_documents(db: AsyncSession):
+    result = await db.execute(select(Documents).order_by(Documents.created_at.desc()))
+    documents = result.scalars().all()
+    print(documents)
+    return documents
+
 async def delete_document():
     pass
